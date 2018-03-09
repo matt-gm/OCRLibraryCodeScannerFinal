@@ -1,0 +1,7 @@
+#Internal package file, do not edit.
+#Wed Mar 07 16:36:26 PST 2018
+0.baseType=DIRECTORY
+0.base=C\:\\Users\\Yossi\\Downloads\\OCRLibraryCodeScanner-master\\OCRLibraryCodeScanner-master\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\56
+0.path=classes.dex
+0.set=DEX
+count=1
