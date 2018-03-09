@@ -204,6 +204,14 @@ public class OcrDetectorProcessor implements Detector.Processor<TextBlock> {
                 if (i == 0)
                 {
                     Log.d("debug", "comparing first line" + (llines.get(0).getValue() == rlines.get(0).getValue()) + llines.get(0).getValue() + " " + rlines.get(0).getValue());
+                    if(isNums(llines.get(i).getValue()) && isNums(rlines.get(i).getValue())){
+                        Log.d("debug", "got into if for both lines being numbers");
+                        int lNum = Integer.parseInt(llines.get(i).getValue());
+                        int rNum = Integer.parseInt(rlines.get(i).getValue());
+                        if(lNum > rNum) return false;
+                        if(rNum > lNum) return true;
+                    }
+
                     if (llines.get(i).getValue().compareTo(rlines.get(i).getValue()) > 0) {
                         Log.d("debug", "left greater than right");
                         return false;
@@ -239,6 +247,9 @@ public class OcrDetectorProcessor implements Detector.Processor<TextBlock> {
                                 Log.d("debug", "comparing" + left_numbers + right_numbers);
                                 return false;
                             }
+                        }
+                        if(!(llines.get(i).getValue().equals(rlines.get(i).getValue()))) {
+                            return true;
                         }
                     }
                 }
@@ -289,7 +300,38 @@ public class OcrDetectorProcessor implements Detector.Processor<TextBlock> {
         return callNums;
     }
 
-    // TODO:  Once this implements Detector.Processor<TextBlock>, implement the abstract methods.
+    public int find(ArrayList<TextBlock> callNums){
+
+        String target = WelcomeScreen.callNumTarget;
+        for (int i = 0; i < callNums.size(); i++){
+            Log.d("Target: ", target);
+            Log.d("CallNum: ", callNums.get(i).getValue());
+            if (callNums.get(i).getValue().contains(target)) {
+                return i;
+            }
+        }
+        return -1;
+        /*ArrayList<String> target = WelcomeScreen.target;
+        ArrayList<Integer> count = new ArrayList<>();
+        for (int i= 0; i < callNums.size(); i++) {
+            count.add(i, 0);
+        }
+        int index = -1;
+        for (int i = 0; i < callNums.size(); i++) {
+            for (int j = 0; j < callNums.get(i).getComponents().size(); j++) {
+                if (target.get(j).equals(callNums.get(i).getComponents().get(j))) {
+                    int value = count.get(i);
+                    value++;
+                    count.set(i, value);
+                }
+            }
+        }
+        int max = Collections.max(count);
+        if (max > 2) {
+            index = count.indexOf(max);
+        }
+        return index;*/
+    }
 
     @Override
     public void receiveDetections(Detector.Detections<TextBlock> detections) {
@@ -299,42 +341,53 @@ public class OcrDetectorProcessor implements Detector.Processor<TextBlock> {
         int compare_at = 0;
         ArrayList<TextBlock> callNums = addCallNums(items);
         ArrayList<TextBlock> callNums2 = addCallNums(items2);
-        for (int i = 0; i < callNums.size(); i++) {
-            //TextBlock item_init2 = callNums.get(i);
-            //TextBlock item_init = callNums2.get(i);
 
-            //OcrGraphic graphic_init = new OcrGraphic(mGraphicOverlay, item_init);
-            // graphic_init.makeWhite();
-            //OcrGraphic graphic_init2 = new OcrGraphic(mGraphicOverlay, item_init2);
-
-            //graphic_init.makeWhite();
-            //mGraphicOverlay.add(graphic_init);
-            //graphic_init2.makeRed();
-            //mGraphicOverlay.add(graphic_init);
-            // mGraphicOverlay.add(graphic_init2);
-            if(i == callNums.size()-1) return ;
-            TextBlock item = callNums.get(compare_at);
-            TextBlock item2 = callNums.get(i+1);
-            OcrGraphic graphic1 = new OcrGraphic(mGraphicOverlay, item2);
-            //Log.d("debug:", item.getValue() + "," + item2.getValue());
-            if (psuedo_sort(item, item2) == false && item != item2) {
-                //graphic_init.makeRed();
-                //mGraphicOverlay.remove(graphic_init);
-                // mGraphicOverlay.add(graphic_init2);
-                Log.d("debug", "out of order adding " + item.getValue() + " " + compare_at);
-                graphic1.makeRed();
-                mGraphicOverlay.add(graphic1);
+        if (WelcomeScreen.search == true) {
+            int index = find(callNums);
+            if (index > -1) {
+                TextBlock target = callNums.get(index);
+                OcrGraphic targetGraphic = new OcrGraphic(mGraphicOverlay, target);
+                targetGraphic.setColor(Color.GREEN);
+                mGraphicOverlay.add(targetGraphic);
             }
-            else {
-                //graphic1.setColor(Color.GREEN);
-                //mGraphicOverlay.add(graphic1);
+        }
+        else {
+            for (int i = 0; i < callNums.size(); i++) {
+                //TextBlock item_init2 = callNums.get(i);
+                //TextBlock item_init = callNums2.get(i);
 
+                //OcrGraphic graphic_init = new OcrGraphic(mGraphicOverlay, item_init);
+                // graphic_init.makeWhite();
+                //OcrGraphic graphic_init2 = new OcrGraphic(mGraphicOverlay, item_init2);
+
+                //graphic_init.makeWhite();
                 //mGraphicOverlay.add(graphic_init);
-                Log.d("debug", "not out of order");
-                compare_at = i + 1;
+                //graphic_init2.makeRed();
+                //mGraphicOverlay.add(graphic_init);
+                // mGraphicOverlay.add(graphic_init2);
+                if (i == callNums.size() - 1) return;
+                TextBlock item = callNums.get(compare_at);
+                TextBlock item2 = callNums.get(i + 1);
+                OcrGraphic graphic1 = new OcrGraphic(mGraphicOverlay, item2);
+                //Log.d("debug:", item.getValue() + "," + item2.getValue());
+                if (psuedo_sort(item, item2) == false && item != item2) {
+                    //graphic_init.makeRed();
+                    //mGraphicOverlay.remove(graphic_init);
+                    // mGraphicOverlay.add(graphic_init2);
+                    Log.d("debug", "out of order adding " + item.getValue() + " " + compare_at);
+                    graphic1.makeRed();
+                    mGraphicOverlay.add(graphic1);
+                } else {
+                    //graphic1.setColor(Color.GREEN);
+                    //mGraphicOverlay.add(graphic1);
+
+                    //mGraphicOverlay.add(graphic_init);
+                    Log.d("debug", "not out of order");
+                    compare_at = i + 1;
+                }
+
+
             }
-
-
         }
 
 

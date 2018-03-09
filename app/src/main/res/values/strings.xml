@@ -21,13 +21,13 @@
     <string name="start">GOT IT</string>
 
     <string name="slide_1_title">Welcome to Check Yo Shelf!</string>
-    <string name="slide_1_desc">The fastest way to detect out of place books.</string>
+    <string name="slide_1_desc">The fastest way to sort and search for books.</string>
 
-    <string name="slide_2_title">How To Use:</string>
-    <string name="slide_2_desc">Point camera at spines of books on a shelf. The Library of Congress Book Codes will be read in, and if an out of place code is detected, a red box will be placed around it.</string>
+    <string name="slide_2_title">How To Use Sort Mode:</string>
+    <string name="slide_2_desc">Point camera at spines of books on a shelf. The call numbers will be read in, and if an out of place code is detected, a red box will be placed around it.</string>
 
-    <string name="slide_3_title">Target Book Mode</string>
-    <string name="slide_3_desc">Coming Soon...?</string>
+    <string name="slide_3_title">How To Use Target Book Mode</string>
+    <string name="slide_3_desc">Enter a desired call number and point camera at shelf. Check Yo Shelf will highlight the spine if that book is in view. </string>
 
     <string name="slide_4_title">For More Help/Advice</string>
     <string name="slide_4_desc">Contact the Check Yo Shelf team: Yossi, Graham, Matt, Jake, or Danny</string>

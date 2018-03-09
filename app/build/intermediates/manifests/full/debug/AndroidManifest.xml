@@ -22,7 +22,7 @@
         android:label="OcrReaderApp"
         android:supportsRtl="true"
         android:testOnly="true"
-        android:theme="@style/Theme.AppCompat" >
+        android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" >
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />

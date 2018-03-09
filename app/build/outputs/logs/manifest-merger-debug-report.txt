@@ -100,7 +100,7 @@ MERGED from [android.arch.lifecycle:runtime:1.0.0] C:\Users\Yossi\.gradle\caches
 	android:allowBackup
 		ADDED from C:\Users\Yossi\Downloads\OCRLibraryCodeScanner-master\OCRLibraryCodeScanner-master\app\src\main\AndroidManifest.xml:11:9-35
 	android:theme
-		ADDED from C:\Users\Yossi\Downloads\OCRLibraryCodeScanner-master\OCRLibraryCodeScanner-master\app\src\main\AndroidManifest.xml:17:9-47
+		ADDED from C:\Users\Yossi\Downloads\OCRLibraryCodeScanner-master\OCRLibraryCodeScanner-master\app\src\main\AndroidManifest.xml:17:9-68
 meta-data#com.google.android.gms.version
 ADDED from C:\Users\Yossi\Downloads\OCRLibraryCodeScanner-master\OCRLibraryCodeScanner-master\app\src\main\AndroidManifest.xml:18:9-20:69
 MERGED from [com.google.android.gms:play-services-basement:9.4.0] C:\Users\Yossi\.gradle\caches\transforms-1\files-1.1\play-services-basement-9.4.0.aar\d9b9d9148e1827c54aa83fe3bcca666e\AndroidManifest.xml:21:9-23:69
